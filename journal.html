@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📖 Journal</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<h1>📖 Personal Journal</h1>
+
+<div class="card">
+    <h2>✍️ Write Today's Thoughts</h2>
+    <textarea id="journalText" rows="5" placeholder="Write your thoughts here..."></textarea>
+    <br><br>
+    <button onclick="saveJournal()">💾 Save Journal</button>
+    <p id="journalStatus"></p>
+</div>
+
+<div class="card">
+    <h2>📚 Previous Journals</h2>
+    <div id="journalList"></div>
+</div>
+
+<button onclick="goBack()">⬅ Back to Dashboard</button>
+
+<script src="script.js"></script>
+</body>
+</html>

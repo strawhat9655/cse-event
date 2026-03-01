@@ -1,0 +1,41 @@
+body {
+    font-family: Arial;
+    background: #f4f7ff;
+    text-align: center;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    margin: 20px auto;
+    width: 320px;
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+button {
+    padding: 10px;
+    margin: 5px;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+input {
+    padding: 8px;
+    width: 80%;
+}
+
+.chart-box {
+    width: 600px;
+    margin: 30px auto;
+}
+textarea {
+    width: 90%;
+    padding: 10px;
+}
+
+#journalList {
+    text-align: left;
+    max-height: 300px;
+    overflow-y: auto;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📊 Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<h1>📊 Mood & Wellness Dashboard</h1>
+
+<div class="card">
+    <h2>😊 Select Mood</h2>
+    <button onclick="setMood('😊 Happy')">😊</button>
+    <button onclick="setMood('😔 Sad')">😔</button>
+    <button onclick="setMood('😡 Angry')">😡</button>
+    <button onclick="setMood('😴 Tired')">😴</button>
+</div>
+
+<div class="card">
+    <h2>🌙 Sleep Hours</h2>
+    <input type="number" id="sleep" placeholder="Hours">
+</div>
+
+<div class="card">
+    <h2>😰 Stress Level (1-10)</h2>
+    <input type="number" id="stress" placeholder="Stress level">
+</div>
+
+<button onclick="saveEntry()">💾 Save Entry</button>
+
+<p id="suggestion"></p>
+
+<div class="chart-box">
+    <canvas id="moodChart"></canvas>
+</div>
+
+<div class="chart-box">
+    <canvas id="sleepChart"></canvas>
+</div>
+<button onclick="window.location.href='journal.html'">
+    📖 Open Journal
+</button>
+<script src="script.js"></script>
+</body>
+</html>
