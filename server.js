@@ -6,7 +6,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public")));
+const DATA_FILE = path.join(__dirname, "data.json");
 
 const DATA_FILE = path.join(__dirname, "data.json");
 
@@ -115,4 +115,5 @@ app.get("/getJournals/:email", (req, res) => {
     if (!user || !user.journals) return res.json([]);
 
     res.json(user.journals);
+
 });
