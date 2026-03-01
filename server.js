@@ -8,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.static(path.join(__dirname)));
 
-const DATA_FILE = path.join(__dirname, "package.json");
+const DATA_FILE = path.join(__dirname, "data.json");
 
 if (!fs.existsSync(DATA_FILE)) {
     fs.writeFileSync(DATA_FILE, JSON.stringify({ users: [] }, null, 2));
@@ -116,3 +116,4 @@ app.get("/getJournals/:email", (req, res) => {
 
     res.json(user.journals);
 });
+
