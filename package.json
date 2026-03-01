@@ -1,7 +1,6 @@
 {
-  "name": "mental-wellness-app",
+  "name": "mood-app",
   "version": "1.0.0",
-  "description": "Mood and Journal App",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
