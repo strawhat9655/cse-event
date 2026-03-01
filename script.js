@@ -1,10 +1,90 @@
 let selectedMood = "";
+// 🔐 AUTH CHECK
+function checkLogin() {
+    const email = localStorage.getItem("userEmail");
 
+    if (!email && 
+        (window.location.pathname.includes("dashboard.html") ||
+         window.location.pathname.includes("journal.html"))) {
+
+        window.location.href = "index.html";
+    }
+}
+
+checkLogin();
 /* SET MOOD */
 function setMood(mood) {
     selectedMood = mood;
-}
 
+    const buttons = document.querySelectorAll(".mood-btn");
+    buttons.forEach(btn => btn.classList.remove("active-mood"));
+
+    const selectedButton = Array.from(buttons).find(
+        btn => btn.getAttribute("data-mood") === mood
+    );
+
+    if (selectedButton) {
+        selectedButton.classList.add("active-mood");
+    }
+
+    changeBackground(mood);
+    showQuote(mood);
+}
+function changeBackground(mood) {
+    document.body.classList.remove("happy-bg","sad-bg","angry-bg","tired-bg");
+
+    if (mood.includes("Happy")) {
+        document.body.classList.add("happy-bg");
+    }
+    if (mood.includes("Sad")) {
+        document.body.classList.add("sad-bg");
+    }
+    if (mood.includes("Angry")) {
+        document.body.classList.add("angry-bg");
+    }
+    if (mood.includes("Tired")) {
+        document.body.classList.add("tired-bg");
+    }
+}
+function showQuote(mood) {
+
+    const quotes = {
+        Happy: [
+            "🌞 Keep shining. The world needs your light.",
+            "✨ Happiness looks good on you.",
+            "🎉 Smile — today is yours."
+        ],
+        Sad: [
+            "🌈 After rain comes a rainbow.",
+            "💙 It's okay to feel low. You are not alone.",
+            "🌟 Tough times don’t last, strong people do."
+        ],
+        Angry: [
+            "🔥 Calm mind brings inner strength.",
+            "🧘 Breathe in peace, breathe out anger.",
+            "🌿 Control your reaction, control your power."
+        ],
+        Tired: [
+            "😴 Rest is productive too.",
+            "🌙 Small breaks create big energy.",
+            "⚡ Recharge yourself. You deserve it."
+        ]
+    };
+
+    let moodKey = "";
+
+    if (mood.includes("Happy")) moodKey = "Happy";
+    if (mood.includes("Sad")) moodKey = "Sad";
+    if (mood.includes("Angry")) moodKey = "Angry";
+    if (mood.includes("Tired")) moodKey = "Tired";
+
+    if (!moodKey) return;
+
+    const randomQuote =
+        quotes[moodKey][Math.floor(Math.random() * quotes[moodKey].length)];
+
+    document.getElementById("dailyQuote").innerText = randomQuote;
+}
 /* REGISTER */
 async function register() {
     const email = document.getElementById("email").value;
@@ -77,6 +157,7 @@ async function saveEntry() {
 /* SUGGESTIONS */
 function generateSuggestion(mood, sleep, stress) {
     let suggestion = "";
+    let music = "";
 
     if (Number(sleep) < 6) {
         suggestion += "😴 You need more sleep! Try 7-8 hours.\n";
@@ -86,11 +167,37 @@ function generateSuggestion(mood, sleep, stress) {
         suggestion += "🧘 High stress detected. Try meditation.\n";
     }
 
+    if (mood.includes("Happy")) {
+        music = `
+        <p>🎵 Energetic Playlist:</p>
+        <a href="https://www.youtube.com/watch?v=ZbZSe6N_BXs" target="_blank">Happy - Pharrell Williams</a>
+        `
+        ;
+    }
+
     if (mood.includes("Sad")) {
-        suggestion += "🎵 Listen to relaxing music or watch anime.\n";
+        music = `
+        <p>🎵 Calm & Healing Music:</p>
+        <a href="https://youtu.be/mRD0-GxqHVo?si=ykj_TcGzelnWZTJF" target="_blank">Heat Waves</a>
+        `;
+    }
+
+    if (mood.includes("Angry")) {
+        music = `
+        <p>🎵 Stress Relief Beats:</p>
+        <a href="https://youtu.be/0GVExpdmoDs?si=i7GAjb2sl9OX7di5" target="_blank"> Animals </a>
+        `;
+    }
+
+    if (mood.includes("Tired")) {
+        music = `
+        <p>🎵 Focus Music:</p>
+        <a href="https://www.youtube.com/watch?v=5qap5aO4i9A" target="_blank">24/7 Lofi Radio</a>
+        `;
     }
 
     document.getElementById("suggestion").innerText = suggestion;
+    document.getElementById("musicSuggestion").innerHTML = music;
 }
 
 /* LOAD CHARTS */
@@ -184,4 +291,45 @@ if (window.location.pathname.includes("journal.html")) {
 /* GO BACK TO DASHBOARD */
 function goBack() {
     window.location.href = "dashboard.html";
+}
+// 👤 Display logged user
+window.addEventListener("DOMContentLoaded", () => {
+
+    const email = localStorage.getItem("userEmail");
+
+    // Show email in dropdown
+    const userDisplay = document.getElementById("loggedUser");
+    if (userDisplay && email) {
+        userDisplay.innerText = email;
+    }
+
+    // Generate first letter avatar
+    const avatar = document.getElementById("avatarLetter");
+    if (avatar && email) {
+        avatar.innerText = email.charAt(0).toUpperCase();
+        avatar.style.background = generateColorFromEmail(email);
+    }
+
+});
+// 🚪 LOGOUT
+function logout() {
+    localStorage.removeItem("userEmail");
+    window.location.href = "index.html";
+}
+function toggleUserMenu() {
+    const menu = document.getElementById("userMenu");
+    menu.classList.toggle("show");
+}
+function generateColorFromEmail(email) {
+    const colors = [
+        "#ff6b6b",
+        "#6c5ce7",
+        "#00b894",
+        "#fdcb6e",
+        "#0984e3",
+        "#e84393"
+    ];
+
+    let index = email.charCodeAt(0) % colors.length;
+    return colors[index];
 }
