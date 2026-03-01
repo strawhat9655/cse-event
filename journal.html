@@ -1,11 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📖 Journal</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div class="user-profile" onclick="toggleUserMenu()">
+    <div class="avatar" id="avatarLetter"></div>
+    <div class="user-menu" id="userMenu">
+        <p id="loggedUser"></p>
+        <button onclick="logout()">🚪 Logout</button>
+    </div>
+</div>
 <h1>📖 Personal Journal</h1>
 
 <div class="card">
