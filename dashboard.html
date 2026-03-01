@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>📊 Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-
+<div class="user-profile" onclick="toggleUserMenu()">
+    <div class="avatar" id="avatarLetter"></div>
+    <div class="user-menu" id="userMenu">
+        <p id="loggedUser"></p>
+        <button onclick="logout()">🚪 Logout</button>
+    </div>
+</div>
 <h1>📊 Mood & Wellness Dashboard</h1>
 
 <div class="card">
     <h2>😊 Select Mood</h2>
-    <button onclick="setMood('😊 Happy')">😊</button>
-    <button onclick="setMood('😔 Sad')">😔</button>
-    <button onclick="setMood('😡 Angry')">😡</button>
-    <button onclick="setMood('😴 Tired')">😴</button>
+    <button class="mood-btn" data-mood="😊 Happy" onclick="setMood('😊 Happy')">😊</button>
+<button class="mood-btn" data-mood="😔 Sad" onclick="setMood('😔 Sad')">😔</button>
+<button class="mood-btn" data-mood="😡 Angry" onclick="setMood('😡 Angry')">😡</button>
+<button class="mood-btn" data-mood="😴 Tired" onclick="setMood('😴 Tired')">😴</button>
 </div>
 
 <div class="card">
@@ -30,6 +37,14 @@
 <button onclick="saveEntry()">💾 Save Entry</button>
 
 <p id="suggestion"></p>
+<div class="card">
+    <h2>🌟 Daily Motivation</h2>
+    <div id="dailyQuote" class="quote-box"></div>
+</div>
+<div class="card">
+    <h2>🎵 Recommended Music</h2>
+    <div id="musicSuggestion"></div>
+</div>
 
 <div class="chart-box">
     <canvas id="moodChart"></canvas>
@@ -42,5 +57,6 @@
     📖 Open Journal
 </button>
 <script src="script.js"></script>
+
 </body>
 </html>
